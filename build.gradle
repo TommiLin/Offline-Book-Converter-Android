@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application' version '9.1.0'
+    id 'com.chaquo.python' version '17.1.0'
+}
+android {
+    namespace 'io.github.tommilin.bookconverter'
+    compileSdk 36
+    buildFeatures { buildConfig = true }
+    buildTypes {
+        debug { signingConfig = null }
+    }
+    defaultConfig {
+        applicationId 'io.github.tommilin.bookconverter'
+        minSdk 24
+        targetSdk 35
+        versionCode 17
+        versionName '0.1.16'
+        ndk { abiFilters 'arm64-v8a', 'x86_64' }
+    }
+    sourceSets.main {
+        manifest.srcFile 'AndroidManifest.xml'
+        java.srcDirs = ['src']
+        res.srcDirs = ['res']
+        assets.srcDirs = ['assets']
+    }
+}
+chaquopy {
+    defaultConfig {
+        version = '3.11'
+        def buildPythonPath = System.getenv('CHAQUOPY_BUILD_PYTHON')
+        if (buildPythonPath) buildPython(buildPythonPath)
+        extractPackages 'ebook_converter'
+        pip {
+            def localWheels = System.getenv('BOOK_WHEELS')
+            if (localWheels) options '--no-index', '--find-links', localWheels
+            options '--find-links', "$projectDir/wheels"
+            if (!localWheels) options '--find-links', 'https://github.com/bilec/ebook-converter-lib/releases/expanded_assets/pypdfium2-5.14.0-android'
+            install 'ebook-converter-lib==1.6.1'
+        }
+    }
+}
+
+

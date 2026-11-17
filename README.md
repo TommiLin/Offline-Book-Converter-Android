@@ -29,6 +29,16 @@ http://192.168.31.31:8080. Keep the app open during the download and tap
 **Stop Wi-Fi sharing** when finished. While enabled, the catalog is available
 to devices on the same network. Choose MOBI 6 for Kindle 4.
 
+## About and updates
+
+Open the information icon for the version, quick help, the full README,
+author details, and the official Android repository:
+https://github.com/TommiLin/Offline-Book-Converter-Android
+
+The app checks once on first launch and offers a manual check in About.
+Publish a stable GitHub Release with tag vX.Y.Z and attach the matching
+OfflineBookConverter-Android-X.Y.Z.apk. Updates open GitHub in the browser.
+
 ## Build
 
 Use JDK 17 or later, Gradle 9.3.1, Android SDK 36 with Build Tools 36.0.0, and Python 3.11. Set
